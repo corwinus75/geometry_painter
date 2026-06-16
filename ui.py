@@ -353,11 +353,11 @@ class SidePanel:
 
     def _build_widgets(self) -> None:
         x = self.rect.x + 10
-        W = self.rect.width - 20
+        w = self.rect.width - 20
         y = self.rect.y + 10
 
         # Tryb narzędzia
-        bw = (W - 4) // 2
+        bw = (w - 4) // 2
         self.btn_select = Button((x, y, bw, 32), "Zaznacz",
                                  icon=FA["select"], color=UI_SURFACE)
         self.btn_draw   = Button((x + bw + 4, y, bw, 32), "Rysuj",
@@ -376,14 +376,14 @@ class SidePanel:
         self.shape_buttons: dict[str, Button] = {}
         bh = 28
         for key, icon, lbl in shape_defs:
-            btn = Button((x, y, W, bh), lbl, color=UI_SURFACE, icon=icon)
+            btn = Button((x, y, w, bh), lbl, color=UI_SURFACE, icon=icon)
             self.shape_buttons[key] = btn
             y += bh + 3
         self.shape_buttons["circle"].active = True
         y += 8
 
         # Suwaki
-        sl_w = W
+        sl_w = w
         y += 18  # miejsce na "_section_label ROZMIAR"
         self.sl_size1 = Slider((x, y + 16, sl_w, 20), 10, 150, 50,  "Rozmiar")
         y += 48
@@ -397,7 +397,7 @@ class SidePanel:
         # Paleta kolorów
         sw = 22
         self.swatches: list[ColorSwatch] = []
-        per_row = W // (sw + 4)
+        per_row = w // (sw + 4)
         for i, col in enumerate(DEFAULT_COLORS):
             cx = x + (i % per_row) * (sw + 4)
             cy = y + (i // per_row) * (sw + 4)
@@ -407,26 +407,26 @@ class SidePanel:
         y += rows * (sw + 4) + 10
 
         # Operacje
-        self.btn_save     = Button((x, y, W, 30), "Zapisz projekt",
+        self.btn_save     = Button((x, y, w, 30), "Zapisz projekt",
                                    color=(40, 70, 50), icon=FA["save"])
         y += 34
-        self.btn_load     = Button((x, y, W, 30), "Wczytaj projekt",
+        self.btn_load     = Button((x, y, w, 30), "Wczytaj projekt",
                                    color=(40, 55, 80), icon=FA["load"])
         y += 34
-        self.btn_delete   = Button((x, y, W, 30), "Usuń zaznaczoną",
+        self.btn_delete   = Button((x, y, w, 30), "Usuń zaznaczoną",
                                    color=(70, 35, 35), icon=FA["trash"],
                                    text_color=(255, 120, 120))
         y += 34
-        self.btn_clear    = Button((x, y, W, 30), "Wyczyść",
+        self.btn_clear    = Button((x, y, w, 30), "Wyczyść",
                                    color=(60, 40, 30), icon=FA["warning"],
                                    text_color=(230, 160, 30))
         y += 34
-        self.btn_grid     = Button((x, y, W, 30), "Siatka wł./wył.",
+        self.btn_grid     = Button((x, y, w, 30), "Siatka wł./wył.",
                                    color=UI_SURFACE, icon=FA["grid"])
         y += 34
-        self.btn_to_front = Button((x, y, (W - 4) // 2, 28), "Wierzch",
+        self.btn_to_front = Button((x, y, (w - 4) // 2, 28), "Wierzch",
                                    icon=FA["up"])
-        self.btn_to_back  = Button((x + (W - 4) // 2 + 4, y, (W - 4) // 2, 28),
+        self.btn_to_back  = Button((x + (w - 4) // 2 + 4, y, (w - 4) // 2, 28),
                                    "Dół", icon=FA["down"])
         y += 38
         self._list_y = y
@@ -513,7 +513,7 @@ class SidePanel:
                          (self.rect.x, self.rect.y),
                          (self.rect.x, self.rect.bottom))
 
-        x, W = self.rect.x + 10, self.rect.width - 20
+        x, w = self.rect.x + 10, self.rect.width - 20
 
         self._section_label(surface, x, self.rect.y + 10, "TRYB")
         self.btn_select.draw(surface)
@@ -538,9 +538,9 @@ class SidePanel:
 
         # Podgląd aktualnego koloru
         pygame.draw.rect(surface, self.color,
-                         pygame.Rect(x + W - 30, col_y - 3, 22, 22), border_radius=4)
+                         pygame.Rect(x + w - 30, col_y - 3, 22, 22), border_radius=4)
         pygame.draw.rect(surface, UI_BORDER,
-                         pygame.Rect(x + W - 30, col_y - 3, 22, 22), 1, border_radius=4)
+                         pygame.Rect(x + w - 30, col_y - 3, 22, 22), 1, border_radius=4)
 
         op_y = self.swatches[-1].rect.bottom + 14
         self._section_label(surface, x, op_y, "OPERACJE")
@@ -553,7 +553,7 @@ class SidePanel:
         list_y = self._list_y
         self._section_label(surface, x, list_y, f"FIGURY ({len(shape_infos)})")
         list_y += 16
-        list_rect = pygame.Rect(x, list_y, W, self.rect.bottom - list_y - 8)
+        list_rect = pygame.Rect(x, list_y, w, self.rect.bottom - list_y - 8)
         self._list_rect = list_rect
         pygame.draw.rect(surface, UI_SURFACE, list_rect, border_radius=4)
         pygame.draw.rect(surface, UI_BORDER,  list_rect, 1, border_radius=4)
