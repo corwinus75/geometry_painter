@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"C:\\\\Users\\\\Admin\\\\PycharmProjects\\\\geometry_painter\\\\.venv\\\\Scripts\\\\python.exe\" -c \"import pygame; print\\(pygame.__version__\\)\")"
+    ]
+  }
+}
